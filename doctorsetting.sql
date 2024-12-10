@@ -5,7 +5,7 @@ USE `doctor_settings_db`;
 DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users` (
     `ClinicSpotsID` INT,
-    `UserID` INT PRIMARY KEY,
+    `UserID` INT,
     `Name` VARCHAR(255),
     `PhoneNumber` VARCHAR(15),
     `Email` VARCHAR(255),
@@ -18,20 +18,22 @@ CREATE TABLE `Users` (
     `IsSSO` BOOLEAN,
     `UserType` VARCHAR(50),
     `IsFaceVerified` BOOLEAN,
-    `IsSocialUser` BOOLEAN
+    `IsSocialUser` BOOLEAN,
+    PRIMARY KEY ( `UserID` )
 );
 
 -- Table for Address
 DROP TABLE IF EXISTS `Address`;
 CREATE TABLE `Address` (
-    `ID` INT PRIMARY KEY,
+    `ID` INT,
     `AddressLine1` VARCHAR(255),
     `AddressLine2` VARCHAR(255),
     `Locality` VARCHAR(255),
     `City` VARCHAR(100),
     `State` VARCHAR(100),
     `Country` VARCHAR(100),
-    `Pincode` VARCHAR(20)
+    `Pincode` VARCHAR(20),
+    PRIMARY KEY (`ID`)
 );
 
 -- Table for DoctorDetails
@@ -58,7 +60,7 @@ CREATE TABLE `DoctorDetails` (
 -- Table for Slots
 DROP TABLE IF EXISTS `Slots`;
 CREATE TABLE `Slots` (
-    `SlotID` INT PRIMARY KEY,
+    `SlotID` INT,
     `StartDate` DATE,
     `EndDate` DATE,
     `AppointmentDuration` INT, -- in minutes
@@ -74,13 +76,14 @@ CREATE TABLE `Slots` (
     `UpdatedBy` INT,
     `CreatedAt` DATETIME,
     `UpdatedAt` DATETIME,
-    `Unavailability` JSON -- Array of day data
+    `Unavailability` JSON,
+    PRIMARY KEY(`SlotID`)
 );
 
 -- Table for Appointments
 DROP TABLE IF EXISTS `Appointments`;
 CREATE TABLE `Appointments` (
-    `AppointmentID` INT PRIMARY KEY,
+    `AppointmentID` INT,
     `StartStop` VARCHAR(50),
     `Repeats` BOOLEAN,
     `MeetingToBeVerified` BOOLEAN,
@@ -98,16 +101,18 @@ CREATE TABLE `Appointments` (
     `UpdatedAt` DATETIME,
     `Description` TEXT,
     `Participants` JSON, -- Array of participant details
-    `AppointmentStatus` JSON -- Array of AppointmentStatus IDs
+    `AppointmentStatus` JSON, -- Array of AppointmentStatus IDs
+    PRIMARY KEY (`AppointmentID`)
 );
 
 -- Table for AppointmentStatus
 DROP TABLE IF EXISTS `AppointmentStatus`;
 CREATE TABLE `AppointmentStatus` (
-    `AppointmentStatusID` INT PRIMARY KEY,
+    `AppointmentStatusID` INT,
     `Status` VARCHAR(50),
     `CreatedBy` INT,
     `UpdatedBy` INT,
     `CreatedAt` DATETIME,
-    `UpdatedAt` DATETIME
+    `UpdatedAt` DATETIME,
+    PRIMARY KEY (`AppointmentStatusID`)
 );
