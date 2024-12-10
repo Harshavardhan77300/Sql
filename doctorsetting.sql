@@ -4,13 +4,13 @@ USE `doctor_settings_db`;
 -- Table for Users
 DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users` (
+    `Id` INT,
     `ClinicSpotsID` INT,
-    `UserID` INT,
     `Name` VARCHAR(255),
     `PhoneNumber` VARCHAR(15),
     `Email` VARCHAR(255),
-    `CreatedBy` INT,
-    `UpdatedBy` INT,
+    `CreatedBy` VARCHAR(15),
+    `UpdatedBy` VARCHAR(15),
     `CreatedAt` DATETIME,
     `UpdatedAt` DATETIME,
     `IsEmailVerified` BOOLEAN,
@@ -19,13 +19,14 @@ CREATE TABLE `Users` (
     `UserType` VARCHAR(50),
     `IsFaceVerified` BOOLEAN,
     `IsSocialUser` BOOLEAN,
-    PRIMARY KEY ( `UserID` )
+    PRIMARY KEY ( `Id` )
 );
 
 -- Table for Address
 DROP TABLE IF EXISTS `Address`;
 CREATE TABLE `Address` (
-    `ID` INT,
+    `Id` INT,
+    `UserID` INT,
     `AddressLine1` VARCHAR(255),
     `AddressLine2` VARCHAR(255),
     `Locality` VARCHAR(255),
@@ -33,12 +34,18 @@ CREATE TABLE `Address` (
     `State` VARCHAR(100),
     `Country` VARCHAR(100),
     `Pincode` VARCHAR(20),
-    PRIMARY KEY (`ID`)
+    `CreatedBy` VARCHAR(15),
+    `UpdatedBy` VARCHAR(15),
+    `CreatedAt` DATETIME,
+    `UpdatedAt` DATETIME,
+    PRIMARY KEY (`Id`),
+    FOREIGN KEY (`UserID`) REFERENCES `Users`(`Id`),
 );
 
 -- Table for DoctorDetails
 DROP TABLE IF EXISTS `DoctorDetails`;
 CREATE TABLE `DoctorDetails` (
+    `Id` INT,
     `UserID` INT,
     `ClinicSpotsID` INT,
     `Specialisation` VARCHAR(255),
@@ -46,21 +53,22 @@ CREATE TABLE `DoctorDetails` (
     `PhoneNumber` VARCHAR(15),
     `Email` VARCHAR(255),
     `Experience` INT,
-    `CreatedBy` INT,
-    `UpdatedBy` INT,
+    `CreatedBy` VARCHAR(15),
+    `UpdatedBy` VARCHAR(15),
     `CreatedAt` DATETIME,
     `UpdatedAt` DATETIME,
     `Institution` VARCHAR(255),
     `ClinicAddress` JSON, -- Array of Address IDs
     `Slots` JSON, -- Array of Slot IDs
-    FOREIGN KEY (`UserID`) REFERENCES `Users`(`UserID`),
+    PRIMARY KEY (`Id`),
+    FOREIGN KEY (`UserID`) REFERENCES `Users`(`Id`),
     FOREIGN KEY (`ClinicSpotsID`) REFERENCES `Users`(`ClinicSpotsID`)
 );
 
 -- Table for Slots
 DROP TABLE IF EXISTS `Slots`;
 CREATE TABLE `Slots` (
-    `SlotID` INT,
+    `Id` INT,
     `StartDate` DATE,
     `EndDate` DATE,
     `AppointmentDuration` INT, -- in minutes
@@ -72,18 +80,18 @@ CREATE TABLE `Slots` (
     `EveningSlotEndTime` TIME,
     `NightSlotStartTime` TIME,
     `NightSlotEndTime` TIME,
-    `CreatedBy` INT,
-    `UpdatedBy` INT,
+    `CreatedBy` VARCHAR(15),
+    `UpdatedBy` VARCHAR(15),
     `CreatedAt` DATETIME,
     `UpdatedAt` DATETIME,
     `Unavailability` JSON,
-    PRIMARY KEY(`SlotID`)
+    PRIMARY KEY(`Id`)
 );
 
 -- Table for Appointments
 DROP TABLE IF EXISTS `Appointments`;
 CREATE TABLE `Appointments` (
-    `AppointmentID` INT,
+    `Id` INT,
     `StartStop` VARCHAR(50),
     `Repeats` BOOLEAN,
     `MeetingToBeVerified` BOOLEAN,
@@ -92,27 +100,28 @@ CREATE TABLE `Appointments` (
     `MeetingStatusID` INT,
     `Title` VARCHAR(255),
     `Visit` VARCHAR(255),
-    `ClinicAd` VARCHAR(255),
+    `ClinicAddress` VARCHAR(255),
     `StartTime` DATETIME,
     `EndTime` DATETIME,
-    `CreatedBy` INT,
-    `UpdatedBy` INT,
+    `CreatedBy` VARCHAR(15),
+    `UpdatedBy` VARCHAR(15),
     `CreatedAt` DATETIME,
     `UpdatedAt` DATETIME,
     `Description` TEXT,
     `Participants` JSON, -- Array of participant details
     `AppointmentStatus` JSON, -- Array of AppointmentStatus IDs
-    PRIMARY KEY (`AppointmentID`)
+    PRIMARY KEY (`Id`)
 );
 
--- Table for AppointmentStatus
-DROP TABLE IF EXISTS `AppointmentStatus`;
-CREATE TABLE `AppointmentStatus` (
-    `AppointmentStatusID` INT,
-    `Status` VARCHAR(50),
-    `CreatedBy` INT,
-    `UpdatedBy` INT,
-    `CreatedAt` DATETIME,
-    `UpdatedAt` DATETIME,
-    PRIMARY KEY (`AppointmentStatusID`)
+-- Table for AppointmentsStats
+DROP TABLE IF EXISTS `AppointmentsStats`;
+CREATE TABLE `AppointmentsStats` (
+    `Id` INT,
+    `UserId` INT,
+    `MeetingId` INT,
+    `StartTime` DATETIME,
+    `UpdateTime` DATETIME,
+    `StartStop` JSONS,
+    PRIMARY KEY (`Id`)
 );
+
