@@ -241,3 +241,11 @@ CREATE TABLE `kyb` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`doctorId`) REFERENCES `doctors`(`id`)
 );
+
+-- stages
+DROP TABLE IF EXISTS `stages`;
+CREATE TABLE `stages` (
+  `stage1` VARCHAR(50) NOT NULL,
+  `stage2` VARCHAR(50) NOT NULL,
+  `stage3` VARCHAR(50) NOT NULL,
+);
