@@ -441,7 +441,7 @@ paths:
   /rbac/{actionsid}/actions/Initiate:
     put:
       tags:
-        - BQ - actions
+        - beech
       summary: Update actions record
       description: Update actions record
       operationId: Updateactions
@@ -589,27 +589,27 @@ components:
       properties:
         id:
           type: string
-          description: "\n"
+          description: |+
           format: string
         name:
           type: string
-          description: "\n"
+          description: |+
           format: string
         type:
           type: string
-          description: "\n"
+          description: |+
           format: string
         description:
           type: string
-          description: "\n"
+          description: |+
           format: string
         created_at:
           type: string
-          description: "\n"
+          description: |+
           format: string
         updated_at:
           type: string
-          description: "\n"
+          description: |+
           format: string
     clientsResponse:
       type: object
@@ -621,23 +621,23 @@ components:
       properties:
         id:
           type: string
-          description: "\n"
+          description: |+
           format: string
         subject:
           type: string
-          description: "\n"
+          description: |+
           format: string
         client_id:
           type: integer
-          description: "\n"
-          format: string
+          description: |+
+          format: integer
         created_at:
           type: string
-          description: "\n"
+          description: |+
           format: string
         updated_at:
           type: string
-          description: "\n"
+          description: |+
           format: string
     subjectsResponse:
       type: object
@@ -649,19 +649,24 @@ components:
       properties:
         id:
           type: string
-          description: ''
+          description: |+
+          format: string
         name:
           type: string
-          description: ''
+          description: |+
+          format: string
         description:
           type: string
-          description: ''
+          description: |+
+          format: string
         created_at:
           type: string
-          description: ''
+          description: |+
+          format: string
         updated_at:
           type: string
-          description: ''
+          description: |+
+          format: string
     contextsResponse:
       type: object
       properties:
@@ -672,22 +677,28 @@ components:
       properties:
         id:
           type: string
-          description: ''
+          description: |+
+          format: string
         context_id:
           type: integer
-          description: ''
+          description: |+
+          format: integer
         name:
           type: string
-          description: ''
+          description: |+
+          format: string
         description:
           type: string
-          description: ''
+          description: |+
+          format: string
         created_at:
           type: string
-          description: ''
+          description: |+
+          format: string
         updated_at:
           type: string
-          description: ''
+          description: |+
+          format: string
     resourcesResponse:
       type: object
       properties:
@@ -698,19 +709,24 @@ components:
       properties:
         id:
           type: string
-          description: ''
+          description: |+
+          format: string
         name:
           type: string
-          description: ''
+          description: |+
+          format: string
         description:
           type: string
-          description: ''
+          description: |+
+          format: string
         created_at:
           type: string
-          description: ''
+          description: |+
+          format: string
         updated_at:
           type: string
-          description: ''
+          description: |+
+          format: string
     actionsResponse:
       type: object
       properties:
@@ -721,31 +737,40 @@ components:
       properties:
         id:
           type: string
-          description: ''
+          description: |+
+          format: string
         client_id:
           type: integer
-          description: ''
+          description: |+
+          format: integer
         subject:
           type: string
-          description: ''
+          description: |+
+          format: string
         context_id:
           type: integer
-          description: ''
+          description: |+
+          format: integer
         resource_id:
           type: integer
-          description: ''
+          description: |+
+          format: integer
         action_id:
           type: integer
-          description: ''
+          description: |+
+          format: integer
         is_active:
           type: string
-          description: ''
+          description: |+
+          format: string
         created_at:
           type: string
-          description: ''
+          description: |+
+          format: string
         updated_at:
           type: string
-          description: ''
+          description: |+
+          format: string
     policiesResponse:
       type: object
       properties:
