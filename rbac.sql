@@ -27,8 +27,8 @@ CREATE TABLE `subjects` (
 DROP TABLE IF EXISTS `contexts`;
 CREATE TABLE `contexts` (
     `id` SERIAL,
-    `name` VARCHAR(50) UNIQUE NOT NULL,          -- Example: Savings Account, Checking Account, etc.
-    `description` TEXT,                          -- Optional description of the context
+    `contextsName` VARCHAR(50) UNIQUE NOT NULL,          -- Example: Savings Account, Checking Account, etc.
+    `contextsDescription` TEXT,                          -- Optional description of the context
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
@@ -50,8 +50,8 @@ CREATE TABLE `resources` (
 DROP TABLE IF EXISTS `actions`;
 CREATE TABLE `actions` (
     `id` SERIAL PRIMARY KEY,
-    `name` VARCHAR(50) UNIQUE NOT NULL,        -- Example: View, Edit, Delete
-    `description` TEXT,                        -- Optional description of the action
+    `actionsName` VARCHAR(50) UNIQUE NOT NULL,        -- Example: View, Edit, Delete
+    `actionsDescription` TEXT,                        -- Optional description of the action
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
