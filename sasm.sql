@@ -29,45 +29,45 @@ CREATE TABLE `orders` (
 
 DROP TABLE IF EXIST `ecommercefacility`;
 CREATE TABLE `ecommercefacility` (
-    `ECommerceInstanceReference` VARCHAR(50) PRIMARY KEY,
-    `ECommercePlatformName` VARCHAR(100),
-    `MerchantReference` VARCHAR(50),
-    `ProductReference` VARCHAR(50),
-    `OrderReference` VARCHAR(50),
-    `PaymentReference` VARCHAR(50)
+    `eCommerceInstanceReference` VARCHAR(50) PRIMARY KEY,
+    `eCommercePlatformName` VARCHAR(100),
+    `merchantReference` VARCHAR(50),
+    `productReference` VARCHAR(50),
+    `orderReference` VARCHAR(50),
+    `paymentReference` VARCHAR(50)
 );
 
 DROP TABLE IF EXISTS `merchant`;
 CREATE TABLE  `merchant` (
-    `MerchantReference` VARCHAR(50) PRIMARY KEY,
-    `MerchantName` VARCHAR(100) NOT NULL,
-    `MerchantTaxID` VARCHAR(50),
-    `MerchantStatus` ENUM('Active', 'Inactive', 'Suspended') NOT NULL,
-    `ECommerceInstanceReference` VARCHAR(50),
-    FOREIGN KEY (ECommerceInstanceReference) REFERENCES ecommercefacility(ECommerceInstanceReference)
+    `merchantReference` VARCHAR(50) PRIMARY KEY,
+    `merchantName` VARCHAR(100) NOT NULL,
+    `merchantTaxID` VARCHAR(50),
+    `merchantStatus` ENUM('Active', 'Inactive', 'Suspended') NOT NULL,
+    `eCommerceInstanceReference` VARCHAR(50),
+    FOREIGN KEY (eCommerceInstanceReference) REFERENCES ecommercefacility(eCommerceInstanceReference)
 );
 
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE  `payment` (
-    `PaymentReference` VARCHAR(50) PRIMARY KEY,
-    `PaymentAmount` DECIMAL(10, 2) NOT NULL,
-    `PaymentMethod` ENUM('CreditCard', 'PayPal', 'BankTransfer') NOT NULL,
-    `PaymentStatus` ENUM('Pending', 'Completed', 'Failed') NOT NULL,
-    `ECommerceInstanceReference` VARCHAR(50),
-    `OrderReference` VARCHAR(50),
-    FOREIGN KEY (ECommerceInstanceReference) REFERENCES ecommercefacility(ECommerceInstanceReference),
-    FOREIGN KEY (OrderReference) REFERENCES orders(OrderReference)
+    `paymentReference` VARCHAR(50) PRIMARY KEY,
+    `paymentAmount` DECIMAL(10, 2) NOT NULL,
+    `paymentMethod` ENUM('CreditCard', 'PayPal', 'BankTransfer') NOT NULL,
+    `paymentStatus` ENUM('Pending', 'Completed', 'Failed') NOT NULL,
+    `eCommerceInstanceReference` VARCHAR(50),
+    `orderReference` VARCHAR(50),
+    FOREIGN KEY (eCommerceInstanceReference) REFERENCES ecommercefacility(eCommerceInstanceReference),
+    FOREIGN KEY (orderReference) REFERENCES orders(orderReference)
 
 );
 
 DROP TABLE IF EXISTS `merchantpayout`:
 CREATE TABLE `merchantpayout` (
-    `PayoutReference` VARCHAR(50) PRIMARY KEY,
-    `PayoutAmount` DECIMAL(10, 2) NOT NULL,
-    `PayoutMethod` ENUM('BankTransfer', 'PayPal') NOT NULL,
-    `PayoutStatus` ENUM('Pending', 'Completed', 'Failed') NOT NULL,
-    `ECommerceInstanceReference` VARCHAR(50),
-    `MerchantReference` VARCHAR(50),
-    FOREIGN KEY (ECommerceInstanceReference) REFERENCES ecommercefacility(ECommerceInstanceReference),
-    FOREIGN KEY (MerchantReference) REFERENCES merchant(MerchantReference)
+    `payoutReference` VARCHAR(50) PRIMARY KEY,
+    `payoutAmount` DECIMAL(10, 2) NOT NULL,
+    `payoutMethod` ENUM('BankTransfer', 'PayPal') NOT NULL,
+    `payoutStatus` ENUM('Pending', 'Completed', 'Failed') NOT NULL,
+    `eCommerceInstanceReference` VARCHAR(50),
+    `merchantReference` VARCHAR(50),
+    FOREIGN KEY (eCommerceInstanceReference) REFERENCES ecommercefacility(eCommerceInstanceReference),
+    FOREIGN KEY (merchantReference) REFERENCES merchant(merchantReference)
 );
